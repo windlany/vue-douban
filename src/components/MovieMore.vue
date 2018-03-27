@@ -1,0 +1,118 @@
+<template>
+    <div id="more">
+        <loading :status="loading" />
+        <h1>{{val.title}}</h1>
+        <ul>
+            <a-mov v-for="item in val.items" :key="item.id" :item="item"/>
+        </ul>
+    </div>
+</template>
+
+<script>
+    import AMov from './BaseSingle.vue';
+    import Loading from './BaseLoading.vue'
+    import qs from 'qs';
+    import {mapActions, mapState} from 'vuex';
+
+    export default {
+        data() {
+            return {
+                load: false, 
+                val: {
+                    title: '',
+                    items: []
+                }
+            };
+        },  
+        beforeCreate() {
+            window.scrollTo(0, 0);
+            var type = this.$route.query.type;
+            var name = this.$route.query.tag;
+
+            if(type == 'more') {
+                this.$store.dispatch(name).then(()=> {
+                    this.load = true;
+                    switch(name) {
+                        case 'movHot':
+                            this.val = this.hot;
+                            break;
+                        case 'movTop250':
+                            this.val = this.top250;
+                            break;
+                        case 'movNew':
+                            this.val = this.news;
+                            break; 
+                    }
+                });
+            } else if(type == 'classic') {
+                this.$store.dispatch('movFindByTag', name).then(()=> {
+                    this.load = true;
+                    this.val = this.findByTag;
+                });
+            }
+           
+        }, 
+        methods: { 
+            ...mapActions([
+                'movFindByTag',
+                'movHot',
+                'movTop250',
+                'movNew'
+            ]),
+            // 瀑布流
+            disImg() {
+                
+            },  
+        },
+        computed: {  
+            ...mapState({
+                hot: state => {
+                    return state.movie.hot;
+                },
+                top250: state => {
+                    return state.movie.top250;
+                },
+                news: state => {
+                    return state.movie.news;
+                },
+                findByTag: state=> {
+                    return state.movie.findByTag;
+                }
+            }),
+            loading() {
+                return !(this.load && this.val.items.length != 0);
+            } 
+        },
+        components: {
+            AMov,
+            Loading,
+        }
+    }
+</script>
+
+<style lang="less">
+#more {
+    background-color: #fff;
+    h1 {
+        font-size: 24px;
+        font-weight: 500;
+        margin: 17px 0 6px 0;
+        padding-left: 18px;
+        box-sizing: border-box;
+    }
+    ul {
+        padding: 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 4px;
+        li {
+            width: 32.2%;
+            padding: 0 14px;
+            margin: 0;
+            .img {
+                height: 131px; 
+            }
+        }
+    }
+}
+</style>
