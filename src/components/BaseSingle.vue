@@ -31,7 +31,7 @@
                 this.$router.push({
                     name: 'subject', 
                     query: {
-                        name: this.item.title,
+                        id: this.item.id,
                     }
                 });
             }

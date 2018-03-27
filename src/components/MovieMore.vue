@@ -69,15 +69,9 @@
                 hot: state => {
                     return state.movie.hot;
                 },
-                top250: state => {
-                    return state.movie.top250;
-                },
-                news: state => {
-                    return state.movie.news;
-                },
-                findByTag: state=> {
-                    return state.movie.findByTag;
-                }
+                top250: state => state.movie.top250,
+                news: state => state.movie.news,
+                findByTag: state=> state.movie.findByTag
             }),
             loading() {
                 return !(this.load && this.val.items.length != 0);

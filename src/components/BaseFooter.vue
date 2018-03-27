@@ -20,6 +20,8 @@
 
 <style lang="less">
 .footer {
+    float: left;
+    width: 100%;
     height: 96px;
     margin-top: 30px;
     margin-bottom: 30px;
