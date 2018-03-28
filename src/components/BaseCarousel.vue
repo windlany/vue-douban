@@ -4,14 +4,15 @@
             <span class="left">{{value.title}}</span>
             <span class="right" @click="more">更多</span>
         </div>
-        <ul ref="ul" style="left: 0">
+        <vue-carousel>
             <a-mov v-for="item in value.items" :key="item.id" :item="item"/>
-        </ul>
+        </vue-carousel>
     </div>
 </template>
 
 <script>
     import AMov from './BaseSingle.vue';  // 电影信息组件
+    import VueCarousel from './vue-carousel.vue'
     
     export default {
         props: ['value'],
@@ -61,7 +62,8 @@
             }
         },
         components: {
-            AMov
+            AMov,
+            VueCarousel
         }
     }
 </script>
@@ -81,11 +83,6 @@
             font-size: 1.4rem;
             color: #42bd56;
         }
-    }
-    ul {
-        display: flex;
-        padding: 15px 0;
-        position: relative; 
-    }
+    } 
 }
 </style>

@@ -1,21 +1,26 @@
 <template>
     <div class="find">
         <h1>{{finds.title}}</h1>
-        <ul>
+        <vue-carousel>
             <li v-for="find in finds.items" :key="find.id" :style="{borderColor: find.color}">
                 <router-link to="/" :style="{color: find.color}">{{find.name}}</router-link>
             </li>
-        </ul>
+        </vue-carousel>
     </div>
 </template>
 
 <script>
+    import VueCarousel from './vue-carousel.vue'
+
     export default {
         props: ['finds'],
         data() {
             return {
 
             }
+        },
+        components: {
+            VueCarousel
         }
     }
 </script>

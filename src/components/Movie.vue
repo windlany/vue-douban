@@ -59,18 +59,9 @@
         },
         computed: { 
             ...mapState({
-                hot: state => {
-                    // state.movie.hot.items.length = 7;  // 限制个数
-                    return state.movie.hot;
-                },
-                top250: state => {
-                    // state.movie.top250.items.length = 7;
-                    return state.movie.top250;
-                },
-                news: state => {
-                    // state.movie.news.items.length = 7;
-                    return state.movie.news;
-                },
+                hot: state => state.movie.hot,
+                top250: state => state.movie.top250,
+                news: state => state.movie.news,
             }),
             loading() {  // 确保请求成功并且内容展示在页面上
                 return !(this.hotLoad&&this.topLoad&&this.newLoad 

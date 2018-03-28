@@ -43,13 +43,13 @@
         <div class="actors">
             <h2>影人</h2>
             <ul>
-                <li v-for="(person, index) in info.directors" :key="index">
-                    <img :src="person.avatars.medium" :alt="person.alt">
+                <li v-for="(person, index) in info.directors" :key="index" @click="actorInfo(person.name)">
+                    <img :src="person.avatars.medium">
                     <p class="name">{{person.name}}</p>
                     <p>导演</p>
                 </li>
-                <li v-for="(cast, index) in info.casts" :key="index+info.directors.length">
-                    <img :src="cast.avatars.medium" :alt="cast.alt">
+                <li v-for="(cast, index) in info.casts" :key="index+info.directors.length" @click="actorInfo(cast.name)">
+                    <img :src="cast.avatars.medium">
                     <p class="name">{{cast.name}}</p>
                     <p>演员</p>
                 </li>
@@ -105,6 +105,11 @@
             disAll() {
                 this.$refs.p.style.height = 'auto';
                 this.show = false;
+            },
+            actorInfo(name) {
+                this.$router.push({
+                    path: ''
+                });
             }
         },
         computed: {
