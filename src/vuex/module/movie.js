@@ -1,7 +1,6 @@
 import vue from 'vue';
 import qs from 'qs';
 import ajax from 'axios';
-import { stat } from 'fs';
 
 const MOV_FIND_BY_TAG = 'MOV_FIND_BY_TAG'; // 电影标签搜索
 const MOV_FIND_BY_NAME = 'MOV_FIND_BY_NAME'; // 搜索
@@ -106,7 +105,6 @@ export default {
                 content: '',
                 methods: 'GET',
             })).then((res)=> {
-                console.log(res.data);
                 commit(MOV_INFO, res.data);
             }).catch((error)=> {
                 console.log(error);
@@ -118,7 +116,6 @@ export default {
                 content: '',
                 methods: 'GET',
             })).then((res)=> {
-                console.log(res.data);
                 commit(MOV_INFO_PHOTO, res.data.photos);
             }).catch((error)=> {
                 console.log(error);
@@ -155,7 +152,6 @@ export default {
                 content: '',
                 methods: 'GET'
             })).then(res=> {
-                console.log(res.data);
                 commit(MOV_ACTOR, res.data);
             }).catch(error=> {
                 console.log(error);

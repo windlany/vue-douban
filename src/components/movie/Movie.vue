@@ -64,6 +64,16 @@
                 news: state => state.movie.news,
             }),
             loading() {  // 确保请求成功并且内容展示在页面上
+                if(this.hot.items.length) {
+                    this.hot.items.length = 7;
+                }
+                if(this.top250.items.length) {
+                    this.top250.items.length = 7;
+                }
+                if(this.news.items.length) {
+                    this.news.items.length = 7;
+                }
+
                 return !(this.hotLoad&&this.topLoad&&this.newLoad 
                         && this.hot.items.length!=0 && this.top250.items.length!=0 && this.news.items.length!=0);
             }

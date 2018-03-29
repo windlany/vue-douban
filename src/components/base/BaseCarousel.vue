@@ -16,47 +16,16 @@
     
     export default {
         props: ['value'],
+        created() {
+            console.log(this.value);
+        },
         data() {
             return {
                 startX: 0,
                 endX: 0
             }
         },  
-        methods: {
-            start(e) {
-                e.preventDefault();
-                this.startX = e.targetTouches[0].pageX;
-            },
-            move(e) {
-                e.preventDefault();
-                this.endX = e.targetTouches[0].pageX;
-
-                var ul = this.$refs.ul;
-                var dis = this.endX - this.startX;
-
-                if(dis > 15) {
-                    console.log('right');
-                    if(parseInt(ul.style.left) >= 0) {
-                        ul.style.left = 0;
-                        console.log("it's start.");
-                        return;
-                    } else {
-                        ul.style.left = (parseInt(ul.style.left)+dis) + 'px';
-                        console.log('dis:'+dis+'  '+ul.style.left);
-                    }
-                } else if(dis < -15) {
-                    console.log('left');
-                    if(parseInt(ul.style.left) <= -(this.value.items.length-3)*100) {
-                        ul.style.left = (this.value.items.length-3)*100+'px';
-                        console.log("it's end."); 
-                        return;
-                    } else {
-                        ul.style.left = (parseInt(ul.style.left)+dis) + 'px';
-                        console.log(ul.style.left);
-                    }
-                }
-            
-            },
+        methods: { 
             more() {
                 this.$emit('more');
             }

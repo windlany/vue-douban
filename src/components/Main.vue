@@ -4,7 +4,7 @@
             <router-link to='/' class="index"></router-link>
               <div>
                   <router-link to='/movie' class='item'>电影</router-link>
-                  <router-link to='/' class='item'>图书</router-link>
+                  <router-link to='/book' class='item'>图书</router-link>
                   <router-link to='/' class='item'>广播</router-link>
                   <router-link to='/' class='item'>小组</router-link>
                   <span class='item' @click='disSearch'></span>

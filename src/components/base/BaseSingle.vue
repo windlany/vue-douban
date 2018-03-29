@@ -28,7 +28,6 @@
         },  
         methods: {
             signleInfo() {
-                console.log(this.item.id);
                 this.$router.push({
                     name: 'subject', 
                     query: {
@@ -39,7 +38,13 @@
         },
         computed: {
             starnum() {
-                return Math.floor(this.item.rating.stars/10);
+                if(this.item.rating.stars)
+                    return Math.floor(this.item.rating.stars/10);
+                else if(this.item.rating.average)
+                    return Math.floor(this.item.rating.average/2);
+                else {
+                    
+                }
             }
         }
     }
