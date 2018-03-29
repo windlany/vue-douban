@@ -11,11 +11,11 @@
 </template>
 
 <script>
-    import Loading from './BaseLoading.vue'  // 加载页面
-    import BaseCarousel from './BaseCarousel.vue'  // 系列电影展示组件
-    import BaseFind from './BaseFind.vue'  // 发现好电影
-    import BaseClassfiy from './BaseClassfiy.vue'  // 底部分类
-    import BaseFooter from './BaseFooter.vue'  // 底部
+    import Loading from '../base/BaseLoading.vue'  // 加载页面
+    import BaseCarousel from '../base/BaseCarousel.vue'  // 系列电影展示组件
+    import BaseFind from '../base/BaseFind.vue'  // 发现好电影
+    import BaseClassfiy from '../base/BaseClassfiy.vue'  // 底部分类
+    import BaseFooter from '../base/BaseFooter.vue'  // 底部
     import { mapState, mapActions } from 'vuex'
 
     export default {

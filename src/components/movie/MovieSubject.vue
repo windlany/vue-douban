@@ -43,12 +43,12 @@
         <div class="actors">
             <h2>影人</h2>
             <ul>
-                <li v-for="(person, index) in info.directors" :key="index" @click="actorInfo(person.name)">
+                <li v-for="(person, index) in info.directors" :key="index" @click="actorInfo(person.id)">
                     <img :src="person.avatars.medium">
                     <p class="name">{{person.name}}</p>
                     <p>导演</p>
                 </li>
-                <li v-for="(cast, index) in info.casts" :key="index+info.directors.length" @click="actorInfo(cast.name)">
+                <li v-for="(cast, index) in info.casts" :key="index+info.directors.length" @click="actorInfo(cast.id)">
                     <img :src="cast.avatars.medium">
                     <p class="name">{{cast.name}}</p>
                     <p>演员</p>
@@ -74,23 +74,24 @@
 </template>  
 
 <script>
-    import Loading from './BaseLoading.vue'
-    import BaseFooter from './BaseFooter.vue'
+    import Loading from '../base/BaseLoading.vue'
+    import BaseFooter from '../base/BaseFooter.vue'
     import {mapActions, mapState} from 'vuex';
 
     export default {
         data() {
             return {
                 star: ['','','','',''], 
-                loading: true,
+                load: false,
                 show: true, 
                 look: ['想看', '看过'],
             }
         },
         beforeCreate() {
+            window.scrollTo(0, 0);
             var id = this.$route.query.id; 
             this.$store.dispatch('movInfo', id).then(()=> {
-                this.loading = false;
+                this.load = true;
             });  
             // this.$store.dispatch('movPhoto', id).then(()=> {
             //     this.loading = false;
@@ -102,13 +103,17 @@
                 'movInfo',
                 'movPhoto',
             ]),
+            // 显示更多简介
             disAll() {
                 this.$refs.p.style.height = 'auto';
                 this.show = false;
             },
-            actorInfo(name) {
+            actorInfo(id) {
                 this.$router.push({
-                    path: ''
+                    name: 'actorInfo',
+                    query: {
+                        id
+                    }
                 });
             }
         },
@@ -118,7 +123,12 @@
                 // photos: state=> state.movie.movPhoto,
             }), 
             starnum() {
+                // 评分星级
                 return Math.floor(this.info.rating.stars/10);
+            },
+            loading() {
+                // 数据请求成功并且渲染到页面隐藏遮罩层
+                return !(this.load && this.info.rating);  
             }
         },
         components: {
@@ -133,7 +143,6 @@
     padding: 0 18px;
     background-color: #fff;
     h1 {
-         height: 32px;
          line-height: 32px;
          padding: 30px 0 5px 0;
          font-size: 24px;

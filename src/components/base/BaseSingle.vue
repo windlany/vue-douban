@@ -28,6 +28,7 @@
         },  
         methods: {
             signleInfo() {
+                console.log(this.item.id);
                 this.$router.push({
                     name: 'subject', 
                     query: {

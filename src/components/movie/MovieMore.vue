@@ -9,8 +9,8 @@
 </template>
 
 <script>
-    import AMov from './BaseSingle.vue';
-    import Loading from './BaseLoading.vue'
+    import AMov from '../base/BaseSingle.vue';
+    import Loading from '../base/BaseLoading.vue'
     import qs from 'qs';
     import {mapActions, mapState} from 'vuex';
 

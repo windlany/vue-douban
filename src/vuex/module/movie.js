@@ -11,6 +11,7 @@ const MOV_NEW = 'MOV_NEW';  // 新片榜
 
 const MOV_INFO = 'MOV_INFO';  // 电影条目
 const MOV_INFO_PHOTO = 'MOV_INFO_PHOTO';  // 电影剧照
+const MOV_ACTOR = 'MOV_ACTOR';  // 电影演员详细信息
 
 export default {
     state: {   
@@ -33,6 +34,7 @@ export default {
         findByName: [],  //  根据名字查找的电影
         movInfo: [], // 单个电影信息
         movPhoto: [],
+        actor: [],
     },
     mutations: {
         [MOV_FIND_BY_TAG](state, info) {
@@ -60,48 +62,23 @@ export default {
         [MOV_INFO_PHOTO](state, info) {
             state.movPhoto = info || [];
         },
+        [MOV_ACTOR](state, info) {
+            state.actor = info || [];
+        }
     },
     actions: {
-        // 根据传入的tag搜电影组
-        movFindByTag({commit}, tag) {
-            ajax.post('http://127.0.0.1:3000', qs.stringify({
-                path: '/v2/movie/search?',
-                content: qs.stringify({tag: tag}),  // query
-                methods: 'GET',
-            })).then((res)=> {
-                commit(MOV_FIND_BY_TAG, { 
-                    data: res.data.subjects, 
-                    tag: tag
-                });
-            }).catch((error)=> {
-                console.log(error);
-            });
-        },
-        // 传入的movInfo为查询信息
-        movFindByName({commit}, movInfo) {
-            ajax.post('http://127.0.0.1:3000', qs.stringify({
-                path: '/v2/movie/search?',
-                content: qs.stringify({q: movInfo}),
-                methods: 'GET',
-            })).then((res)=> {
-                commit(MOV_FIND_BY_NAME, res.data.subjects);
-            }).catch((error)=> {
-                console.log(error);
-            });
-        },
-        movHot({commit}) {
+        movHot({commit}) {  // hot
             ajax.post('http://127.0.0.1:3000', qs.stringify({
                 path: '/v2/movie/in_theaters',
                 content: '',
                 methods: 'GET',
             })).then((res)=> {
-                console.log(res.data);
                 commit(MOV_HOT, res.data.subjects); 
             }).catch((error)=> {
                 console.log(error);
             });
         },
-        movTop250({commit}) {
+        movTop250({commit}) { // top250
             ajax.post('http://127.0.0.1:3000', qs.stringify({
                 path: '/v2/movie/top250',
                 content: '',
@@ -112,7 +89,7 @@ export default {
                 console.log(error);
             });
         },
-        movNew({commit}) {
+        movNew({commit}) {  // 即将上映
             ajax.post('http://127.0.0.1:3000', qs.stringify({
                 path: '/v2/movie/coming_soon',
                 content: '',
@@ -135,7 +112,7 @@ export default {
                 console.log(error);
             });
         },
-        movPhoto({commit}, movId) {  // 需要许可，so...
+        movPhoto({commit}, movId) {  // 获取剧照，需要许可，so...
             ajax.post('http://127.0.0.1:3000', qs.stringify({
                 path: '/v2/movie/subject/'+movId+'/photos',
                 content: '',
@@ -144,6 +121,43 @@ export default {
                 console.log(res.data);
                 commit(MOV_INFO_PHOTO, res.data.photos);
             }).catch((error)=> {
+                console.log(error);
+            });
+        },
+        movFindByTag({commit}, tag) {  // 根据传入的tag搜电影组
+            ajax.post('http://127.0.0.1:3000', qs.stringify({
+                path: '/v2/movie/search?',
+                content: qs.stringify({tag: tag}),  // query
+                methods: 'GET',
+            })).then((res)=> {
+                commit(MOV_FIND_BY_TAG, { 
+                    data: res.data.subjects, 
+                    tag: tag
+                });
+            }).catch((error)=> {
+                console.log(error);
+            });
+        },
+        movFindByName({commit}, movInfo) { // 传入的movInfo为查询信息
+            ajax.post('http://127.0.0.1:3000', qs.stringify({
+                path: '/v2/movie/search?',
+                content: qs.stringify({q: movInfo}),
+                methods: 'GET',
+            })).then((res)=> {
+                commit(MOV_FIND_BY_NAME, res.data.subjects);
+            }).catch((error)=> {
+                console.log(error);
+            });
+        },
+        movActor({commit}, id) {
+            ajax.post('http://127.0.0.1:3000', qs.stringify({
+                path: '/v2/movie/celebrity/'+id,
+                content: '',
+                methods: 'GET'
+            })).then(res=> {
+                console.log(res.data);
+                commit(MOV_ACTOR, res.data);
+            }).catch(error=> {
                 console.log(error);
             });
         }

@@ -3,9 +3,10 @@ import Router from 'vue-router';
 import App from '@/App';
 import main from '@/components/Main';
 import index from '@/components/Index';
-import movie from '@/components/Movie';
-import movieMore from '@/components/MovieMore';
-import movieSubject from '@/components/MovieSubject';
+import movie from '@/components/movie/Movie';
+import movieMore from '@/components/movie/MovieMore';
+import movieSubject from '@/components/movie/MovieSubject';
+import actorInfo from '@/components/movie/MovieActorInfo'
 
 Vue.use(Router);
 
@@ -19,6 +20,7 @@ export default new Router({
         {path: 'movie', name: 'movie', component: movie},
         {path: 'movie/more', name: 'movieMore', component: movieMore},
         {path: 'movie/subject', name: 'subject', component: movieSubject},
+        {path: 'movie/celebrity', name: 'actorInfo', component: actorInfo},
       ]
     }
   ]
