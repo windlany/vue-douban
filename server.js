@@ -1,4 +1,5 @@
 var http = require('http');
+var https = require('https');
 var querystring = require('querystring');
 
 http.createServer(function (req, res) {
@@ -23,7 +24,7 @@ http.createServer(function (req, res) {
         };
         var data = '';
         
-        var new_Req = http.request(option, function (new_Res) {
+        var new_Req = https.request(option, function (new_Res) {
             new_Res.setEncoding('utf8');
             new_Res.on('data', function (chunk) {
                 data += chunk;
