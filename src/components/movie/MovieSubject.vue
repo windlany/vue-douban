@@ -42,7 +42,7 @@
 
         <div class="actors">
             <h2>影人</h2>
-            <ul>
+            <vue-carousel>
                 <li v-for="(person, index) in info.directors" :key="index" @click="actorInfo(person.id)">
                     <img :src="person.avatars.medium">
                     <p class="name">{{person.name}}</p>
@@ -53,7 +53,7 @@
                     <p class="name">{{cast.name}}</p>
                     <p>演员</p>
                 </li>
-            </ul>
+            </vue-carousel>
         </div>
 
         <div class="moreTag">
@@ -76,6 +76,8 @@
 <script>
     import Loading from '../base/BaseLoading.vue'
     import BaseFooter from '../base/BaseFooter.vue'
+    import VueCarousel from '../base/vue-carousel.vue'
+
     import {mapActions, mapState} from 'vuex';
 
     export default {
@@ -134,6 +136,7 @@
         components: {
             Loading,
             BaseFooter,
+            VueCarousel
         }
     }
 </script>
