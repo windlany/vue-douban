@@ -2,24 +2,33 @@ import vue from 'vue';
 import qs from 'qs';
 import ajax from 'axios';
 
-const BOOK_EMOTION = 'BOOK_EMOTIOB';
+const BOOK_EMOTION = 'BOOK_EMOTION';
+const BOOK_IMPROVEMENT = 'BOOK_IMPROVEMENT';
 const BOOK_TAG = 'BOOK_TAG'; // 根据标签搜索图书数组
 const BOOK_ID = 'BOOK_ID'; // 根据id搜图书具体信息
 
 export default {
     state: {
-        emotionBooks: {title: '', items: []},
-        books: {title: '', items: []},
+        emotionBooks: {items: []},
+        improvementBooks: {items: []},
+        books: {items: []},
         bookInfo: {}
     },
     mutations: {
         [BOOK_EMOTION](state, info) {
             state.emotionBooks.title = info.title;
             state.emotionBooks.items = info.items || [];
+            state.emotionBooks.tag = info.tag;
+        },
+        [BOOK_IMPROVEMENT](state, info) {
+            state.improvementBooks.title = info.title;
+            state.improvementBooks.items = info.items || [];
+            state.improvementBooks.tag = info.tag;
         },
         [BOOK_TAG](state, info) {
             state.books.title = info.title;
             state.books.items = info.items || [];
+            state.books.tag = info.tag;
         },
         [BOOK_ID](state, info) {
             state.bookInfo = info || {};
@@ -34,11 +43,13 @@ export default {
             })).then(res=> {
                 var obj = {
                     title: '最受关注的图书 | ' + tag + '类',
-                    items: res.data.books
+                    items: res.data.books,
+                    tag: tag
                 };
-                console.log(tag);
                 if(tag == '情感') {
                     commit(BOOK_EMOTION, obj);  // 情感类book
+                } else if (tag == '励志') {
+                    commit(BOOK_IMPROVEMENT, obj);  // 情感类book
                 } else {
                     commit(BOOK_TAG, obj); 
                 }

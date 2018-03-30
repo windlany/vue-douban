@@ -5,7 +5,7 @@
         <base-carousel :value="top250" @more='toMore("movTop250")' />
         <base-carousel :value="news" @more='toMore("movNew")' />
         <base-find :finds="finds" />
-        <base-classfiy :classfies="classfies"/>
+        <base-classfiy :classfies="classfies" @toClass="toClass"/>
         <BaseFooter />
     </div>
 </template>
@@ -86,11 +86,19 @@
             ]),  
             toMore(typeName) { 
                 this.$router.push({
-                    path: 'movie/more',
                     name: 'movieMore',
                     query: { // 路由传参 
                         type: 'more',
                         tag: typeName
+                    } 
+                })
+            },
+            toClass(tag) {
+                this.$router.push({
+                    name: 'movieMore',
+                    query: { // 路由传参 
+                        type: 'classic',
+                        tag
                     } 
                 })
             }

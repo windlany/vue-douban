@@ -3,8 +3,8 @@
         <loading :status="loading" />
         <base-carousel :value="emotion" @more='toMore("情感")' />
         <base-carousel :value="improvement" @more='toMore("励志")' />
-        <base-find :finds="finds" />
-        <base-classfiy :classfies="classfies"/>
+        <base-find :finds="finds" @toClass="toClass" />
+        <base-classfiy :classfies="classfies" @toClass="toClass" />
         <BaseFooter />
     </div>
 </template>
@@ -29,14 +29,14 @@
                 finds: {
                     title: '发现好图书',
                     items: [
-                        {id: '0', name: '小波看书', color: '#FFC46C'},
-                        {id: '1', name: '村上春树周边', color: '#42BD56'},
-                        {id: '2', name: '我凭名字认定了你', color: '#4F9DED'},
-                        {id: '3', name: '不可饶恕的女人们', color: '#CC3344'},
-                        {id: '4', name: '爱欲书', color: '#2384E8'},
-                        {id: '5', name: '他们还写侦探小说', color: '#FF4055'},
-                        {id: '6', name: '人生识字始忧患', color: '#FFAC2D'},
-                        {id: '7', name: '诗歌书店', color: '#3BA94D'},
+                        {id: '0', name: '小波看书', color: '#FFC46C', tag: '王小波'},
+                        {id: '1', name: '村上春树周边', color: '#42BD56', tag: '村上春树'},
+                        {id: '2', name: '爱情是种化学反应', color: '#4F9DED', tag: '爱情'},
+                        {id: '3', name: '走进世界', color: '#CC3344', tag: '科幻'},
+                        {id: '4', name: '和梦想一起遨游', color: '#2384E8', tag: '奇幻'},
+                        {id: '5', name: '他们还写侦探小说', color: '#FF4055', tag: '推理'},
+                        {id: '6', name: '我看过了许多美景', color: '#FFAC2D', tag: '旅行'},
+                        {id: '7', name: '古时少年游', color: '#3BA94D', tag: '古代'},
                     ]
                 }
             }
@@ -54,14 +54,26 @@
             ...mapActions(['bookTag', 'bookId']),
             toMore(tag) {
                 this.$router.push({
-                    
+                    name: 'bookMore',
+                    query: {
+                        tag: tag
+                    }
+                });
+            },
+            toClass(tag) {
+                this.$router.push({
+                    name: 'bookClassfiy',
+                    query: {
+                        type: 'bookClass',
+                        tag
+                    }
                 });
             }
         },
         computed: {
             ...mapState({
                 emotion: state=> state.book.emotionBooks,
-                improvement: state=> state.book.books,
+                improvement: state=> state.book.improvementBooks,
             }),
             loading() {
                 if(this.emotion.items.length) {
