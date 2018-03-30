@@ -15,10 +15,7 @@
     import VueCarousel from './vue-carousel.vue'
     
     export default {
-        props: ['value'],
-        created() {
-            console.log(this.value);
-        },
+        props: ['value'], 
         data() {
             return {
                 startX: 0,

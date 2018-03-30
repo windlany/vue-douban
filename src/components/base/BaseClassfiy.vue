@@ -3,7 +3,7 @@
         <h1>{{classfies.title}}</h1>
         <ul>
             <li v-for="(classfiy, index) in classfies.items" :key="index">
-                <router-link :to="{name:'movieMore', query: {type: 'classic', tag: classfiy}}">{{classfiy}}</router-link>
+                <a @click="toClassfiy(classfiy)">{{classfiy}}</a>
                 <span v-if="classfiy"></span>
             </li>
         </ul>
@@ -16,6 +16,11 @@
         data() {
             return {
                 
+            }
+        },
+        methods: {
+            toClassfiy(classfiy) {
+                this.$emit('toClass', classfiy);
             }
         }
     }

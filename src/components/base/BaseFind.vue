@@ -3,7 +3,7 @@
         <h1>{{finds.title}}</h1>
         <vue-carousel>
             <li v-for="find in finds.items" :key="find.id" :style="{borderColor: find.color}">
-                <router-link to="/" :style="{color: find.color}">{{find.name}}</router-link>
+                <a :style="{color: find.color}" @click="toClass(find.tag)">{{find.name}}</a>
             </li>
         </vue-carousel>
     </div>
@@ -17,6 +17,11 @@
         data() {
             return {
 
+            }
+        },
+        methods: {
+            toClass(tag) {
+                this.$emit('toClass', tag);
             }
         },
         components: {
