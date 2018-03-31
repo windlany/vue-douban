@@ -23,6 +23,7 @@
 - vue-router
 - vuex
 - axios
+- node(代理服务器，解决跨域)
 ## 主要目录结构 
 - src
     - components
@@ -46,3 +47,17 @@
 - 电影版块
 - 图书版块
 - 音乐版块 
+## 运行项目
+``` bash
+# clone项目到本地
+git clone https://github.com/windlany/vue-douban.git
+
+# 安装项目依赖
+npm install
+
+# 运行项目
+npm run dev
+
+# 运行代理服务器
+npm run node
+```
