@@ -2,6 +2,8 @@
 
 > vue全家桶实现基于豆瓣api高仿豆瓣app手机版，由于部分API不开放所以包含三个版块：电影、图书、音乐。
 ## 效果图 
+![](https://github.com/windlany/vue-douban/blob/master/static/preview/index.png)
+
 ![](https://github.com/windlany/vue-douban/blob/master/static/preview/loading.png)
 
 ![](https://github.com/windlany/vue-douban/blob/master/static/preview/search.png)
@@ -11,6 +13,8 @@
 ![](https://github.com/windlany/vue-douban/blob/master/static/preview/movieMore.png)
 
 ![](https://github.com/windlany/vue-douban/blob/master/static/preview/movieSignle.png)
+
+![](https://github.com/windlany/vue-douban/blob/master/static/preview/actor.png)
 
 ![](https://github.com/windlany/vue-douban/blob/master/static/preview/book.png)
 
