@@ -7,10 +7,10 @@
         <div>
             <ul class="link">
                 <li v-for="item in items" :key="item.id">
-                    <router-link to='item.route'>
+                    <a @click='route(item.route)'>
                         <div :style="{color: item.color}">{{item.type}}</div>
                         <span>{{item.sub}}</span>
-                    </router-link>
+                    </a>
                 </li>
             </ul>
             <ul class="event">
@@ -28,13 +28,13 @@ export default {
     data() {
         return {
             items: [
-                {id: 0, type: '电影', sub: '影院热映', route: '', color: 'rgb(35, 132, 232)'},
-                {id: 1, type: '电视', sub: '正在热播', route: '', color: 'rgb(122, 106, 219)'},
-                {id: 2, type: '图书', sub: '畅销排行', route: '', color: 'rgb(159, 120, 96)'},
+                {id: 0, type: '电影', sub: '影院热映', route: 'movie', color: 'rgb(35, 132, 232)'},
+                {id: 1, type: '电视', sub: '正在热播', route: 'movie', color: 'rgb(122, 106, 219)'},
+                {id: 2, type: '图书', sub: '畅销排行', route: 'book', color: 'rgb(159, 120, 96)'},
                 {id: 3, type: '同城', sub: '周末活动', route: '', color: 'rgb(230, 70, 126)'},
                 {id: 4, type: '小组', sub: '志趣相投', route: '', color: 'rgb(42, 184, 204)'},
-                {id: 5, type: '音乐', sub: '新碟榜', route: '', color: 'rgb(244, 143, 46)'},
-                {id: 6, type: '阅读', sub: '电子书', route: '', color: 'rgb(159, 120, 96)'},
+                {id: 5, type: '音乐', sub: '新碟榜', route: 'music', color: 'rgb(244, 143, 46)'},
+                {id: 6, type: '阅读', sub: '电子书', route: 'book', color: 'rgb(159, 120, 96)'},
                 {id: 7, type: '游戏', sub: '虚拟世界', route: '', color: 'rgb(87, 116, 197)'},
                 {id: 8, type: '应用', sub: '玩手机', route: '', color: 'rgb(89, 108, 221)'},
                 {id: 9, type: '广播', sub: '友邻动态', route: '', color: 'rgb(225, 100, 77)'},
@@ -45,6 +45,12 @@ export default {
     },
     methods: {
         hide() {
+            this.$emit('hide');
+        },
+        route(r) {
+            this.$router.push({
+                name: r
+            });
             this.$emit('hide');
         }
     }
