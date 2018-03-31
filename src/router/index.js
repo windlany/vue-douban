@@ -40,6 +40,7 @@ export default new Router({
         {path: 'book/classfiy', name: 'bookClassfiy', component: baseMore},
         {path: 'book/subject', name: 'bookSubject', component: bookSubject},
       
+        // music
         {path: 'music', name: 'music', component: music},
         {path: 'music/more', name: 'musicMore', component: bookMore},
         {path: 'music/subject', name: 'musicSubject', component: musicSubject},
