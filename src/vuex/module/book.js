@@ -58,7 +58,16 @@ export default {
             });
         },
         bookId({commit}, id) {
-
+            ajax.post('http://127.0.0.1:3000', qs.stringify({
+                path: '/v2/book/'+id,
+                content: '',
+                methods: 'GET',
+            })).then(res=> { 
+                console.log(res.data);
+                commit(BOOK_ID, res.data);  
+            }).catch(error=> {
+                console.log(error);
+            });
         }
     }
 }

@@ -4,7 +4,7 @@
         <h1 v-show="!(type == 'bookClass')">{{val.title}}</h1>
         <h1 v-show="type == 'bookClass'">{{val.tag}}</h1>
         <ul>
-            <a-mov v-for="item in val.items" :key="item.id" :item="item"/>
+            <a-mov v-for="item in val.items" :key="item.id" :item="item" @signle="toSignle"/>
         </ul>
     </div>
 </template>
@@ -50,10 +50,15 @@
                     this.load = true;
                     this.val = this.findByTag;
                 });
-            } else if (type == 'bookClass') {
+            } else if(type == 'bookClass') {
                 this.$store.dispatch('bookTag', name).then(()=> {
                     this.load = true;
                     this.val = this.books;  
+                });
+            } else if(type == 'musicClass') {
+                this.$store.dispatch('musicTag', name).then(()=> {
+                    this.load = true;
+                    this.val = this.musics;  
                 });
             }
            
@@ -64,8 +69,21 @@
                 'movHot',
                 'movTop250',
                 'movNew',
-                'bookTag'
+                'bookTag',
+                'musicTag'
             ]),
+            toSignle(id) {
+                var name;
+                if(this.type == 'musicClass') name = 'musicSubject';
+                else 
+                    name = this.type=='bookClass' ? 'bookSubject': 'subject';
+                this.$router.push({
+                    name, 
+                    query: {
+                        id
+                    }
+                });
+            },
             // 瀑布流
             disImg() {
                 
@@ -77,7 +95,8 @@
                 top250: state => state.movie.top250,
                 news: state => state.movie.news,
                 findByTag: state=> state.movie.findByTag,
-                books: state=> state.book.books
+                books: state=> state.book.books,
+                musics: state=> state.music.musics
             }),
             loading() {
                 return !(this.load && this.val.items.length != 0);

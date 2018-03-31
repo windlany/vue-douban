@@ -14,6 +14,10 @@ import book from '@/components/book/Book';
 import bookMore from '@/components/book/BookMore';
 import bookSubject from '@/components/book/BookSubject'
 
+import music from '@/components/music/music';
+import musicSubject from '@/components/music/MusicSubject'
+
+
 Vue.use(Router);
 
 export default new Router({
@@ -35,6 +39,12 @@ export default new Router({
         {path: 'book/more', name: 'bookMore', component: bookMore},
         {path: 'book/classfiy', name: 'bookClassfiy', component: baseMore},
         {path: 'book/subject', name: 'bookSubject', component: bookSubject},
+      
+        {path: 'music', name: 'music', component: music},
+        {path: 'music/more', name: 'musicMore', component: bookMore},
+        {path: 'music/subject', name: 'musicSubject', component: musicSubject},
+        {path: 'music/classfiy', name: 'musicClassfiy', component: baseMore},
+        
       ]
     }
   ]

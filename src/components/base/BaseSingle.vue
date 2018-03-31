@@ -1,6 +1,6 @@
 <template>
     <li class="single" @click="signleInfo">
-        <div class="img" :style="{backgroundImage: 'url('+item.images.medium+')'}"></div>
+        <div class="img" :style="{backgroundImage: 'url('+img+')'}"></div>
         <p class="title">{{item.title}}</p>
         <div class="score">
             <div v-if="item.rating.average != 0">
@@ -23,17 +23,12 @@
         props: ['item'],
         data() {
             return {
-                star: ['', '', '', '', '']
+                star: ['', '', '', '', ''],
             }
         },  
         methods: {
-            signleInfo() {
-                this.$router.push({
-                    name: 'subject', 
-                    query: {
-                        id: this.item.id,
-                    }
-                });
+            signleInfo() { 
+                this.$emit('signle', this.item.id);
             }
         },
         computed: {
@@ -45,6 +40,12 @@
                 else {
                     
                 }
+            },
+            img() {
+                if(this.item.images) {
+                    return this.item.images.medium;
+                }
+                return this.item.image;
             }
         }
     }

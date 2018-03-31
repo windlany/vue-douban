@@ -5,7 +5,7 @@
             <span class="right" @click="more">更多</span>
         </div>
         <vue-carousel>
-            <a-mov v-for="item in value.items" :key="item.id" :item="item"/>
+            <a-mov v-for="item in value.items" :key="item.id" :item="item" @signle="signle"/>
         </vue-carousel>
     </div>
 </template>
@@ -25,6 +25,9 @@
         methods: { 
             more() {
                 this.$emit('more');
+            },
+            signle(id) {
+                this.$emit('toSignle', id);
             }
         },
         components: {

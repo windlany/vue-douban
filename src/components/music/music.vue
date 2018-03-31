@@ -1,8 +1,8 @@
 <template>
     <div class="book">
         <loading :status="loading" />
-        <base-carousel :value="emotion" @more='toMore("情感")' @toSignle="toSignle" />
-        <base-carousel :value="improvement" @more='toMore("励志")' @toSignle="toSignle" />
+        <base-carousel :value="emotion" @more='toMore("经典")' @toSignle="toSignle" />
+        <base-carousel :value="improvement" @more='toMore("粤语")' @toSignle="toSignle" />
         <base-find :finds="finds" @toClass="toClass" />
         <base-classfiy :classfies="classfies" @toClass="toClass" />
         <BaseFooter />
@@ -24,55 +24,54 @@
                 improvementLoad: false,
                 classfies: {
                     title: '分类浏览',
-                    items: ['小说','爱情','历史','外国文学','青春','励志','随笔','传记','推理','旅行','奇幻','经管'],
+                    items: ['流行','摇滚','民谣','独立','华语','欧美','日本','韩国'],
                 },
                 finds: {
-                    title: '发现好图书',
+                    title: '发现好音乐',
                     items: [
-                        {id: '0', name: '小波看书', color: '#FFC46C', tag: '王小波'},
-                        {id: '1', name: '村上春树周边', color: '#42BD56', tag: '村上春树'},
-                        {id: '2', name: '爱情是种化学反应', color: '#4F9DED', tag: '爱情'},
-                        {id: '3', name: '走进世界', color: '#CC3344', tag: '科幻'},
-                        {id: '4', name: '和梦想一起遨游', color: '#2384E8', tag: '奇幻'},
-                        {id: '5', name: '他们还写侦探小说', color: '#FF4055', tag: '推理'},
-                        {id: '6', name: '我看过了许多美景', color: '#FFAC2D', tag: '旅行'},
-                        {id: '7', name: '古时少年游', color: '#3BA94D', tag: '古代'},
+                        {id: '0', name: '当我们听爵士乐，我们在听什么', color: '#FFC46C', tag: '爵士'},
+                        {id: '1', name: '如果你也喜欢日本的樱花', color: '#42BD56', tag: '日本'},
+                        {id: '2', name: 'someone like you', color: '#4F9DED', tag: '欧美'},
+                        {id: '3', name: '走进粤语', color: '#CC3344', tag: '粤语'},
+                        {id: '4', name: '你知道Eason吗', color: '#2384E8', tag: '陈奕迅'},
+                        {id: '5', name: '他们还唱民谣', color: '#FF4055', tag: '民谣'},
+                        {id: '6', name: '我们都爱摇滚，年轻要任性', color: '#FFAC2D', tag: '摇滚'},
                     ]
                 }
             }
         },
         beforeCreate() {
             window.scrollTo(0, 0);
-            this.$store.dispatch('bookTag', '情感').then(()=> {  // 获取情感类书籍
+            this.$store.dispatch('musicTag', '经典').then(()=> {  // 获取情感类书籍
                 this.emotionLoad = true;
             });
-            this.$store.dispatch('bookTag', '励志').then(()=> {  // 获取励志类书籍
+            this.$store.dispatch('musicTag', '粤语').then(()=> {  // 获取励志类书籍
                 this.improvementLoad = true;
             });
         },
         methods: {
-            ...mapActions(['bookTag', 'bookId']),
+            ...mapActions(['musicTag', 'musicId']),
             toMore(tag) {
                 this.$router.push({
-                    name: 'bookMore',
+                    name: 'musicMore',
                     query: {
-                        type: 'more',
+                        type: 'music',
                         tag: tag
                     }
                 });
             },
             toClass(tag) {
                 this.$router.push({
-                    name: 'bookClassfiy',
+                    name: 'musicClassfiy',
                     query: {
-                        type: 'bookClass',
+                        type: 'musicClass',
                         tag
                     }
                 });
             },
             toSignle(id) {
                 this.$router.push({
-                    name: 'bookSubject',
+                    name: 'musicSubject',
                     query: {
                         id
                     }
@@ -81,8 +80,8 @@
         },
         computed: {
             ...mapState({
-                emotion: state=> state.book.emotionBooks,
-                improvement: state=> state.book.improvementBooks,
+                emotion: state=> state.music.emotionMusics,
+                improvement: state=> state.music.improvementMusics,
             }),
             loading() {
                 if(this.emotion.items.length) {

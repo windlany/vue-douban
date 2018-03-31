@@ -1,9 +1,9 @@
 <template>
     <div id="movie">
         <loading :status="loading" />
-        <base-carousel :value="hot" @more='toMore("movHot")' />
-        <base-carousel :value="top250" @more='toMore("movTop250")' />
-        <base-carousel :value="news" @more='toMore("movNew")' />
+        <base-carousel :value="hot" @more='toMore("movHot")' @toSignle="toSignle" />
+        <base-carousel :value="top250" @more='toMore("movTop250")' @toSignle="toSignle" />
+        <base-carousel :value="news" @more='toMore("movNew")' @toSignle="toSignle" />
         <base-find :finds="finds" />
         <base-classfiy :classfies="classfies" @toClass="toClass"/>
         <BaseFooter />
@@ -57,27 +57,6 @@
                 }
             };
         },
-        computed: { 
-            ...mapState({
-                hot: state => state.movie.hot,
-                top250: state => state.movie.top250,
-                news: state => state.movie.news,
-            }),
-            loading() {  // 确保请求成功并且内容展示在页面上
-                if(this.hot.items.length) {
-                    this.hot.items.length = 7;
-                }
-                if(this.top250.items.length) {
-                    this.top250.items.length = 7;
-                }
-                if(this.news.items.length) {
-                    this.news.items.length = 7;
-                }
-
-                return !(this.hotLoad&&this.topLoad&&this.newLoad 
-                        && this.hot.items.length!=0 && this.top250.items.length!=0 && this.news.items.length!=0);
-            }
-        },
         methods: {
             ...mapActions([
                 'movHot',
@@ -101,6 +80,35 @@
                         tag
                     } 
                 })
+            },
+            toSignle(id) {
+                this.$router.push({
+                    name: 'subject',
+                    query: { // 路由传参 
+                        id
+                    } 
+                })
+            }
+        },
+        computed: { 
+            ...mapState({
+                hot: state => state.movie.hot,
+                top250: state => state.movie.top250,
+                news: state => state.movie.news,
+            }),
+            loading() {  // 确保请求成功并且内容展示在页面上
+                if(this.hot.items.length) {
+                    this.hot.items.length = 7;
+                }
+                if(this.top250.items.length) {
+                    this.top250.items.length = 7;
+                }
+                if(this.news.items.length) {
+                    this.news.items.length = 7;
+                }
+
+                return !(this.hotLoad&&this.topLoad&&this.newLoad 
+                        && this.hot.items.length!=0 && this.top250.items.length!=0 && this.news.items.length!=0);
             }
         },
         components: {

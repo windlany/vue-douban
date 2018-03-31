@@ -3,7 +3,7 @@
         <loading :status="loading" />
         <h1>{{info.title}}</h1>
 
-        <section class="info">
+        <section>
             <div class="left">
                 <div class="score">
                     <div>
@@ -30,9 +30,9 @@
         </section>
 
         <ul class="look">
-                <li v-for="(item, index) in look" :key="index">
-                    {{item}}
-                </li>
+            <li v-for="(item, index) in look" :key="index">
+                {{item}}
+            </li>
         </ul>
 
         <div class="introduct">

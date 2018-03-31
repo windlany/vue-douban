@@ -1,9 +1,9 @@
 <template>
     <div class="carousel">
         <ul ref="ul" style="left: 0;"
+            @click="click"
             @touchstart="touchStart"
-            @touchmove="touchmove"
-            @touchend="touchend">
+            @touchmove="touchmove">
             <slot></slot>
         </ul>
     </div>
@@ -18,6 +18,10 @@
             }
         },
         methods: {
+            click(ev) {
+                ev = ev || window.event;
+                ev.preventDefault();           
+            },
             touchStart(ev) {
                 ev = ev || window.event;
                 this.startX = ev.touches[0].pageX;
@@ -25,19 +29,16 @@
             touchmove(ev) {
                 ev = ev || window.event;
                 this.endX = ev.touches[0].pageX;
-            },
-            touchend(ev) {
-                ev = ev || window.event;
-                
+
                 var dis = this.endX - this.startX;  
                 var left = parseInt(this.$refs.ul.style.left);
 
                 if(dis > 0 && left <= 0) { // right
-                    this.$refs.ul.style.left = (left+dis) > 0 ? 0 : (left+dis)+'px';
+                    this.$refs.ul.style.left = (left+10) > 0 ? 0 : ((left+10))+'px';
                 } else {  // left
-                    this.$refs.ul.style.left = (left+dis) + 'px';
-                }
-            } 
+                    this.$refs.ul.style.left = (left-10) < -400 ? left : (left-10) + 'px';
+                } 
+            }, 
         }
     }
 </script>

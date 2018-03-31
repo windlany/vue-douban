@@ -1,6 +1,6 @@
 <template>
-    <li class="booksignle">
-        <img :src="item.images.medium">
+    <li class="booksignle" @click="signle">
+        <img :src="img">
         <div class="info">
             <h3>{{item.title}}</h3>
             <div class="score">
@@ -16,9 +16,13 @@
                     暂无评分
                 </div>
             </div>
-            <p>
+            <p v-if="item.images">
                 <span v-for="(author, index) in item.author" :key="index">{{author}} / </span>
                 <span>{{item.publisher}} / {{item.pubdate}}</span>
+            </p>
+            <p v-else>
+                <span v-for="(singer, index) in item.attrs.singer" :key="index">{{singer}} / </span>
+                <span>{{item.attrs.publisher[0]}} / {{item.attrs.pubdate[0]}}</span>
             </p>
         </div>
     </li>
@@ -32,9 +36,20 @@
                 star: ['','','','','']
             }
         },
+        methods: {
+            signle() {
+                this.$emit('signle', this.item.id);
+            }
+        },
         computed: {
             starnum() {
                 return Math.floor(this.item.rating.average/2);
+            },
+            img() {
+                if(this.item.images) {
+                    return this.item.images.medium;
+                }
+                return this.item.image;
             }
         }
     }
