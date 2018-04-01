@@ -105,6 +105,7 @@ export default {
                 content: '',
                 methods: 'GET',
             })).then((res)=> {
+                console.log(res.data);
                 commit(MOV_INFO, res.data);
             }).catch((error)=> {
                 console.log(error);

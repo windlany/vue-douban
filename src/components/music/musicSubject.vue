@@ -198,7 +198,7 @@
     .introduct {
         margin-bottom: 30px;
         p {
-            height: 60px;
+            max-height: 60px;
             overflow: hidden;
             font-size: 15px;
             color: #494949;
@@ -234,7 +234,7 @@
     .list {
         div {
             position: relative;
-            height: 118px;
+            max-height: 118px;
             font-size: 15px;
             color: #494949;
             overflow: hidden;

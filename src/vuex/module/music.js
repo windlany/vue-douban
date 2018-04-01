@@ -5,6 +5,7 @@ import ajax from 'axios';
 const MUSIC_EMOTION = 'MUSIC_EMOTION';
 const MUSIC_IMPROVEMENT = 'MUSIC_IMPROVEMENT';
 const MUSIC_TAG = 'MUSIC_TAG'; // 根据标签搜索图书数组
+const MUSIC_QUERY = 'MUSIC_QUERY';
 const MUSIC_ID = 'MUSIC_ID'; // 根据id搜图书具体信息
 
 export default {
@@ -30,6 +31,9 @@ export default {
             state.musics.items = info.items || [];
             state.musics.tag = info.tag;
         },
+        [MUSIC_QUERY](state, info) {
+            state.musics = info || [];
+        },
         [MUSIC_ID](state, info) {
             state.musicInfo = info || {};
         }
@@ -53,6 +57,17 @@ export default {
                 } else {
                     commit(MUSIC_TAG, obj); 
                 }
+            }).catch(error=> {
+                console.log(error);
+            });
+        },
+        musicQuery({commit}, query) {  // 根据标签查找music
+            ajax.post('http://127.0.0.1:3000', qs.stringify({
+                path: '/v2/music/search?',
+                content: qs.stringify({q: query}),
+                methods: 'GET',
+            })).then(res=> {  
+                commit(MUSIC_QUERY, res.data.musics); 
             }).catch(error=> {
                 console.log(error);
             });

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import App from '@/App';
+
 import main from '@/components/Main';
 import index from '@/components/Index';
 
@@ -17,6 +18,7 @@ import bookSubject from '@/components/book/BookSubject'
 import music from '@/components/music/music';
 import musicSubject from '@/components/music/MusicSubject'
 
+import searchResult from '@/components/searchResult'
 
 Vue.use(Router);
 
@@ -27,6 +29,8 @@ export default new Router({
       component: main,
       children: [
         {path: '', name: 'main', component: index},
+
+        {path: 'search', name: 'result', component: searchResult},
 
         // movie
         {path: 'movie', name: 'movie', component: movie},
@@ -43,8 +47,8 @@ export default new Router({
         // music
         {path: 'music', name: 'music', component: music},
         {path: 'music/more', name: 'musicMore', component: bookMore},
-        {path: 'music/subject', name: 'musicSubject', component: musicSubject},
         {path: 'music/classfiy', name: 'musicClassfiy', component: baseMore},
+        {path: 'music/subject', name: 'musicSubject', component: musicSubject},
         
       ]
     }

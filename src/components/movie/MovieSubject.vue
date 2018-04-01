@@ -49,7 +49,7 @@
                     <p>导演</p>
                 </li>
                 <li v-for="(cast, index) in info.casts" :key="index+info.directors.length" @click="actorInfo(cast.id)">
-                    <img :src="cast.avatars.medium">
+                    <img :src="cast.avatars && cast.avatars.medium">
                     <p class="name">{{cast.name}}</p>
                     <p>演员</p>
                 </li>

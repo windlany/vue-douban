@@ -2,7 +2,7 @@
     <div id="search">
         <header>
             <span @click='hide'>关闭</span>
-            <input type="text">
+            <input type="text" v-model="search" @keyup.enter="enter" >
         </header>
         <div>
             <ul class="link">
@@ -27,6 +27,7 @@
 export default {
     data() {
         return {
+            search: '',
             items: [
                 {id: 0, type: '电影', sub: '影院热映', route: 'movie', color: 'rgb(35, 132, 232)'},
                 {id: 1, type: '电视', sub: '正在热播', route: 'movie', color: 'rgb(122, 106, 219)'},
@@ -52,6 +53,18 @@ export default {
                 name: r
             });
             this.$emit('hide');
+        },
+        enter() {
+            if(this.search.trim()) {
+                this.$router.push({
+                    name: 'result',
+                    query: {
+                        search: this.search.trim()
+                    }
+                });
+                this.$emit('hide');
+            }
+            this.search = '';
         }
     }
 }
@@ -88,7 +101,10 @@ export default {
             padding-left: 5px;
             box-sizing: border-box;
         }
-        input:focus { background-image: none; }
+        input:focus { 
+            background-image: none; 
+            outline: none;    
+        }
 
     } 
     .link li {
