@@ -49,7 +49,7 @@
                     else 
                         this.val = this.musics;
                 });
-            }
+            } 
         },
         methods: {
             ...mapActions(['bookTag', 'musicTag']),

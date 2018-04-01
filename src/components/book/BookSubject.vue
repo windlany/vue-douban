@@ -45,7 +45,7 @@
         <div class="moreTag">
             <h2>查看更多豆瓣高分好书</h2>
             <span v-for="(tag, index) in info.tags" :key="index">
-                <router-link :to="{name: 'bookMore', query: {type: 'tag', tag: tag.name}}">{{tag.name}}</router-link>
+                <router-link :to="{name: 'bookMore', query: {type: 'more', tag: tag.name}}">{{tag.name}}</router-link>
             </span>
         </div>
 
